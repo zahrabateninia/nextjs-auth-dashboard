@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginSchema } from "@/lib/validation";
-import { fetchUser, saveUser } from "@/lib/auth";
+import { loginWithPhone } from "@/lib/auth";
 import { Input, Button } from "@/components/ui";
 
 const LoginForm: React.FC = () => {
@@ -16,7 +16,6 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     setError(null);
 
-    // Validate the phone number only
     const parsed = loginSchema.safeParse({ phone });
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Invalid input");
@@ -25,11 +24,7 @@ const LoginForm: React.FC = () => {
 
     setLoading(true);
     try {
-      // Fetch a random user from the API
-      const user = await fetchUser();
-      // Store user in localStorage
-      saveUser(user);
-      // Redirect to dashboard
+      await loginWithPhone(parsed.data.phone); // reuse cached user if exists
       router.push("/dashboard");
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Login failed";
@@ -41,10 +36,8 @@ const LoginForm: React.FC = () => {
 
   return (
     <form className="card" onSubmit={onSubmit} noValidate>
-      <h1 className="h1" style={{ textAlign: "center" }}>Login</h1>
-      <p className="subtitle" style={{ textAlign: "center" }}>
-        Enter your Iranian mobile number to continue.
-      </p>
+      <h1 className="h1">Login</h1>
+      <p className="subtitle">Enter your Iranian mobile number to continue.</p>
 
       <div style={{ display: "grid", gap: 16 }}>
         <Input
@@ -57,7 +50,6 @@ const LoginForm: React.FC = () => {
           autoComplete="tel-national"
           required
         />
-
         <Button type="submit" loading={loading}>
           Login
         </Button>
