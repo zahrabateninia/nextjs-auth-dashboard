@@ -39,11 +39,9 @@ main.page {
   max-width: 440px;
   padding: clamp(20px, 4vw, 32px);
   box-shadow: var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
@@ -67,4 +65,93 @@ main.page {
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--card);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Navbar right section: logo, email, avatar, logout aligned horizontally */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap; /* prevents wrapping */
+}
+
+.avatar-small {
+  border-radius: 50%;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.content h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.content p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  /* Hide email on smaller screens */
+  .navbar-right span {
+    display: none;
+  }
+
+  /* Keep avatar and logout inline, no wrapping */
+  .navbar-right {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content h2 {
+    font-size: 22px;
+  }
+
+  .content p {
+    font-size: 14px;
+  }
 }

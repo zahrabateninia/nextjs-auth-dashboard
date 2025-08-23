@@ -26,41 +26,42 @@ export default function DashboardPage() {
   }, [router]);
 
   if (!user) return null;
-
-  // Cast to RandomUser for safe access
   const randomUser = user.user as RandomUser;
 
   return (
-    <main className="page">
-      <section className="card" style={{ textAlign: "center" }}>
-        <h1 className="h1">
-          Welcome, {randomUser.name?.first ?? ""} {randomUser.name?.last ?? ""}
-        </h1>
-        <p className="subtitle">{randomUser.email ?? ""}</p>
-
-        {randomUser.picture?.large && (
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
-          <Image
-            src={randomUser.picture?.large ?? ""}
-            alt={randomUser.name?.first ?? "user"}
-            width={100}
-            height={100}
-            priority
-            className="avatar"
-          />
-          </div>
-        )}
-
-        <Button
-          style={{ marginTop: 24 }}
-          onClick={() => {
-            clearUser();
-            router.push("/auth");
-          }}
-        >
-          Logout
-        </Button>
-      </section>
-    </main>
+    <div className="dashboard">
+      {/* Top Navbar */}
+      <header className="navbar">
+        <h1 className="logo">My Dashboard</h1>
+        <div className="navbar-right">
+          <span className="user-email">{randomUser.email}</span>
+          {randomUser.picture?.thumbnail && (
+            <Image
+              src={randomUser.picture.thumbnail}
+              alt="user avatar"
+              width={40}
+              height={40}
+              className="avatar-small"
+            />
+          )}
+          <Button
+            // size="sm"
+            onClick={() => {
+              clearUser();
+              router.push("/auth");
+            }}
+          >
+            Logout
+          </Button>
+        </div>
+      </header>
+        <main className="content">
+          <h2>
+            Welcome, {randomUser.name?.first ?? ""}{" "}
+            {randomUser.name?.last ?? ""}
+          </h2>
+          <p>This is your personalized dashboard.</p>
+        </main>
+      </div>
   );
 }
