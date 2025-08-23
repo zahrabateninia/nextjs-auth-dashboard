@@ -1,21 +1,22 @@
+import { ApiUser, StoredAuth } from "@/types/user";
+
 export const STORAGE_KEY = "auth_user";
-export const GIST_URL = "https://gist.githubusercontent.com/zahrabateninia/cec47bec95bc1dd5f1c8d8dec62f4843/raw/c46f26e7ba73694c0bc900092bdd28be2ca06d11/mock-user.json";
+export const GIST_URL =
+  "https://gist.githubusercontent.com/zahrabateninia/5c9c6bfc3835469f6ae338b7f76850e3/raw/01ebe54e404a2fb909b351266b56bee3e21872c1/mock-user.json";
 
-export type StoredAuth = {
-  user: unknown; // raw JSON from the file
-  ts: number;    // timestamp
-};
-
-export async function fetchUser(): Promise<unknown> {
+export async function fetchUser(): Promise<ApiUser> {
   const res = await fetch(GIST_URL, { method: "GET" });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch user: ${res.status} ${res.statusText}`);
+  if (!res.ok) throw new Error(`Failed to fetch user: ${res.status} ${res.statusText}`);
+
+  const data = await res.json();
+  // Extract the first user from results
+  if (!Array.isArray(data.results) || data.results.length === 0) {
+    throw new Error("No user found in API response");
   }
-  // This should now reliably parse JSON
-  return await res.json();
+  return data.results[0] as ApiUser;
 }
 
-export function saveUser(user: unknown) {
+export function saveUser(user: ApiUser) {
   if (typeof window === "undefined") return;
   const payload: StoredAuth = { user, ts: Date.now() };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
