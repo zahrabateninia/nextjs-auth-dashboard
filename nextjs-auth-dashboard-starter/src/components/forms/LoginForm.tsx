@@ -1,4 +1,3 @@
-// src/components/forms/LoginForm.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -17,6 +16,7 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     setError(null);
 
+    // Validate the phone number only
     const parsed = loginSchema.safeParse({ phone });
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Invalid input");
@@ -25,8 +25,11 @@ const LoginForm: React.FC = () => {
 
     setLoading(true);
     try {
+      // Fetch a random user from the API
       const user = await fetchUser();
+      // Store user in localStorage
       saveUser(user);
+      // Redirect to dashboard
       router.push("/dashboard");
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Login failed";
@@ -38,8 +41,10 @@ const LoginForm: React.FC = () => {
 
   return (
     <form className="card" onSubmit={onSubmit} noValidate>
-      <h1 className="h1">Login</h1>
-      <p className="subtitle">Enter your Iranian mobile number to continue.</p>
+      <h1 className="h1" style={{ textAlign: "center" }}>Login</h1>
+      <p className="subtitle" style={{ textAlign: "center" }}>
+        Enter your Iranian mobile number to continue.
+      </p>
 
       <div style={{ display: "grid", gap: 16 }}>
         <Input
