@@ -35,13 +35,14 @@ export default function DashboardPage() {
         <h1 className="logo">My Dashboard</h1>
         <div className="navbar-right">
           <span className="user-email">{randomUser.email}</span>
-          {randomUser.picture?.large && (
+          {randomUser.picture?.thumbnail && (
             <Image
-              src={randomUser.picture.large}
+              src={randomUser.picture.thumbnail}
               alt="user avatar"
               width={40}
               height={40}
               className="avatar-small"
+              unoptimized
             />
           )}
           <Button
