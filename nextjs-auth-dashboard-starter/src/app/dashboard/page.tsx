@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getUser, clearUser, StoredAuth } from "@/lib/auth";
 import { Button } from "@/components/ui";
+import Image from "next/image";
 
 interface RandomUser {
   name?: { first: string; last: string };
   email?: string;
-//   picture?: { large?: string; medium?: string; thumbnail?: string };
+  picture?: { large?: string; medium?: string; thumbnail?: string };
 }
 
 export default function DashboardPage() {
@@ -31,20 +32,27 @@ export default function DashboardPage() {
 
   return (
     <main className="page">
-      <section className="card">
+      <section className="card" style={{ textAlign: "center" }}>
         <h1 className="h1">
           Welcome, {randomUser.name?.first ?? ""} {randomUser.name?.last ?? ""}
         </h1>
         <p className="subtitle">{randomUser.email ?? ""}</p>
-        {/* {randomUser.picture?.medium && (
-          <img
-            src={randomUser.picture.medium}
+
+        {randomUser.picture?.large && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
+          <Image
+            src={randomUser.picture?.large ?? ""}
             alt={randomUser.name?.first ?? "user"}
-            style={{ borderRadius: "50%", marginTop: 12 }}
+            width={100}
+            height={100}
+            priority
+            className="avatar"
           />
-        )} */}
+          </div>
+        )}
+
         <Button
-          style={{ marginTop: 20 }}
+          style={{ marginTop: 24 }}
           onClick={() => {
             clearUser();
             router.push("/auth");
