@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getUser, clearUser, StoredAuth } from "@/lib/auth";
+import { Button } from "@/components/ui";
 
 interface RandomUser {
   name?: { first: string; last: string };
@@ -42,7 +43,7 @@ export default function DashboardPage() {
             style={{ borderRadius: "50%", marginTop: 12 }}
           />
         )} */}
-        <button
+        <Button
           style={{ marginTop: 20 }}
           onClick={() => {
             clearUser();
@@ -50,7 +51,7 @@ export default function DashboardPage() {
           }}
         >
           Logout
-        </button>
+        </Button>
       </section>
     </main>
   );

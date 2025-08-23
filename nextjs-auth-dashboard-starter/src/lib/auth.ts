@@ -1,4 +1,3 @@
-// src/lib/auth.ts
 export const STORAGE_KEY = "auth_user";
 
 export type StoredAuth = {
