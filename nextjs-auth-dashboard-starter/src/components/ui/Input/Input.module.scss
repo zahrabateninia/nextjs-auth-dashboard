@@ -1,0 +1,37 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #cfd3d7;
+    }
+  
+    .input {
+      appearance: none;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      outline: none;
+      transition: border-color 120ms ease;
+  
+      &:focus {
+        border-color: rgba(90,156,255,0.8);
+      }
+  
+      &.invalid {
+        border-color: #ff6b6b;
+      }
+    }
+  
+    .error {
+      font-size: 12px;
+      color: #ff8a8a;
+    }
+  }
+  
