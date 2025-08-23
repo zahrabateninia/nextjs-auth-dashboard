@@ -1,7 +1,5 @@
-// src/lib/auth.ts
 export const STORAGE_KEY = "auth_user";
-export const DRIVE_FILE_ID = "1_pzxi2zuvFBSyBN1MZuN5kwM1sqk8dHC";
-export const DRIVE_URL = `https://drive.google.com/uc?export=download&id=${DRIVE_FILE_ID}`;
+export const GIST_URL = "https://gist.githubusercontent.com/zahrabateninia/cec47bec95bc1dd5f1c8d8dec62f4843/raw/c46f26e7ba73694c0bc900092bdd28be2ca06d11/mock-user.json";
 
 export type StoredAuth = {
   user: unknown; // raw JSON from the file
@@ -9,11 +7,11 @@ export type StoredAuth = {
 };
 
 export async function fetchUser(): Promise<unknown> {
-  const res = await fetch(DRIVE_URL, { method: "GET" });
+  const res = await fetch(GIST_URL, { method: "GET" });
   if (!res.ok) {
     throw new Error(`Failed to fetch user: ${res.status} ${res.statusText}`);
   }
-  // This will throw if the file is not JSON
+  // This should now reliably parse JSON
   return await res.json();
 }
 
