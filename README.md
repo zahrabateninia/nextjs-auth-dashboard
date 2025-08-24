@@ -84,30 +84,4 @@ npm run build
 npm start
 ```
 
-### Vercel Deployment
-
-* Project is deployed to Vercel: [https://nextjs-auth-dashboard-psi.vercel.app/dashboard](https://nextjs-auth-dashboard-psi.vercel.app/dashboard)
-* Make sure `next.config.js` allows external images from `randomuser.me`:
-
-```ts
-images: {
-  remotePatterns: [
-    { protocol: "https", hostname: "randomuser.me" }
-  ],
-}
-```
-
----
-
-## Folder Structure
-
-```
-src/
-├─ components/ui/        # Reusable UI components (Button, Input)
-├─ lib/                  # Auth and validation logic
-├─ pages/                # Next.js pages (Auth, Dashboard)
-├─ styles/               # SCSS modules and global styles
-├─ types/                # TypeScript types (user data)
-```
-
 
