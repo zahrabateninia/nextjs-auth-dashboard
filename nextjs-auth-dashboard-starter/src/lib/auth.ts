@@ -1,4 +1,3 @@
-// src/lib/auth.ts
 export const STORAGE_KEY = "auth_user";                
 export const USERS_BY_PHONE_KEY = "auth_users_by_phone"; // map: phone -> StoredAuth
 
@@ -59,7 +58,7 @@ export function cacheUserForPhone(phone: string, user: RandomUser) {
   writeJSON(USERS_BY_PHONE_KEY, store);
 }
 
-// ---- fetch from Random User API ----
+// fetch from Random User API 
 export async function fetchUser(): Promise<RandomUser> {
   const res = await fetch("https://randomuser.me/api/?results=1&nat=us");
   if (!res.ok) throw new Error(`Failed to fetch user: ${res.status} ${res.statusText}`);
@@ -88,7 +87,7 @@ export async function loginWithPhone(phone: string): Promise<RandomUser> {
   return user;
 }
 
-/** Optional: clear everything (session + phone map) */
+/** clear everything (session + phone map) */
 export function clearAllAuth() {
   if (typeof window === "undefined") return;
   localStorage.removeItem(STORAGE_KEY);

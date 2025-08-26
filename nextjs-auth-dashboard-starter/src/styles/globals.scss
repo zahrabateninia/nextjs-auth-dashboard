@@ -30,7 +30,6 @@ main.page {
   padding: clamp(16px, 4vw, 32px);
 }
 
-/* Card */
 .card {
   background: linear-gradient(145deg, var(--card), #1a1b20);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -45,7 +44,7 @@ main.page {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
-/* Headings */
+
 .h1 {
   margin: 0 0 12px 0;
   font-size: clamp(24px, 5vw, 32px);
@@ -81,7 +80,6 @@ main.page {
   color: var(--text);
 }
 
-/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -98,12 +96,11 @@ main.page {
   font-weight: 700;
 }
 
-/* Navbar right section: logo, email, avatar, logout aligned horizontally */
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 12px;
-  white-space: nowrap; /* prevents wrapping */
+  white-space: nowrap;
 }
 
 .avatar-small {
@@ -133,14 +130,12 @@ main.page {
   color: var(--muted);
 }
 
-/* ---------------- Responsive ---------------- */
 @media (max-width: 768px) {
   /* Hide email on smaller screens */
   .navbar-right span {
     display: none;
   }
 
-  /* Keep avatar and logout inline, no wrapping */
   .navbar-right {
     gap: 8px;
   }
